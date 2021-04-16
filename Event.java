@@ -2,10 +2,7 @@ package pandemie;
 
 public enum Event {
 
-    CONTACT(0.2), TIMEOUT(0.5);
-    /** 60 correspond à 60min : le temps affecté
-     *  et 01 à 1m : la distance minimale entre les individus
-     */
+    CONTACT_HOT(0.2), CONTACT_COLD(0.4), TIMEOUT(0.5), VACCIN(0.01);
 
     protected double probability;
 
