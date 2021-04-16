@@ -3,7 +3,7 @@ import javafx.scene.paint.Color;
 
 public enum State {
 
-    SUSCEPTIBLE(Color.YELLOW), INFECTED(Color.RED), RECOVERED(Color.GREEN), DEAD(Color.BLACK);
+    SUSCEPTIBLE(Color.YELLOW), INFECTED(Color.RED), RECOVERED(Color.GREEN), DEAD(Color.BLACK), VACCINATED(Color.PINK);
 
     protected Color color;
 
@@ -32,6 +32,9 @@ public enum State {
         }
         if(color==Color.RED){
             res="Infected";
+        }
+        if(color==Color.PINK){
+            res="Vaccinated";
         }
         return res;
     }
