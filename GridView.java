@@ -36,10 +36,13 @@ class GridView implements SimulatorView {
     // A map for storing colors for participants in the simulation
     private final Map<State, Color> colors
             = new HashMap<>() {{
-                put(State.SUSCEPTIBLE, SUSCEPTIBLE.color);
+
+        put(State.SUSCEPTIBLE, SUSCEPTIBLE.color);
+        put(State.VACCINATED, VACCINATED.color);
         put(State.INFECTED, INFECTED.color);
         put(State.DEAD, DEAD.color);
         put(State.RECOVERED, RECOVERED.color);
+
     }};
     private Label stepLabel;
     private Label populationLbl;
@@ -83,7 +86,7 @@ class GridView implements SimulatorView {
     public void start() {
 
         Stage stage = new Stage();
-        stage.setTitle("Foxes vs. Rabbits");
+        stage.setTitle("PANDEMIE");
         root = new BorderPane();
 
         stepLabel = new Label(STEP_PREFIX);
@@ -106,7 +109,7 @@ class GridView implements SimulatorView {
     }
 
     void stop() {
-        System.out.println("Well, that was fun.");
+        System.out.println("Sorry for the deaths");
     }
 
     /**
@@ -144,7 +147,6 @@ class GridView implements SimulatorView {
             for (int col = 0; col < field.getWidth(); col++) {
                 Sapiens sapiens = field.getSapiensAt(row, col);
                 if ( sapiens != null) {
-                    System.out.println(sapiens.getState().toString());
                     stats.incrementCount(sapiens.getState());
                     fieldView.drawMark(col,
                             row, getColor(sapiens.getState()));
