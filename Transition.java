@@ -18,6 +18,7 @@ import static pandemie.State.*;
  * with only static methods.
  *
  * @author Peter Sander
+ *
  */
 final class Transition {
     // set up a two-key map from a one-key map whose values are
@@ -25,18 +26,26 @@ final class Transition {
     private static final Map<State, Map<Event, Supplier<State>>> TRANSITIONS
             = new HashMap<>();
 
+
+
     // initializes the map: (STATE, EVENT) -> STATE
     // this is a static block which is run on loading the class, before running the
     //  constructor to create an object
     static {
-        // (SUSCEPTIBLE, CONTACT) -> SUSCEPTIBLE | INFECTED
-        TRANSITIONS.put(SUSCEPTIBLE, new HashMap<>());
-        TRANSITIONS.get(SUSCEPTIBLE)
-                .put(CONTACT, () -> happens(CONTACT.probability) ? INFECTED : SUSCEPTIBLE);
-        // (INFECTED, TIMEOUT) -> RECOVERED | DEAD
-        TRANSITIONS.put(INFECTED, new HashMap<>());
-        TRANSITIONS.get(INFECTED)
-                .put(TIMEOUT, () -> happens(TIMEOUT.probability) ? DEAD : RECOVERED);
+
+            // (SUSCEPTIBLE, CONTACT) -> SUSCEPTIBLE | INFECTED
+            TRANSITIONS.put(SUSCEPTIBLE, new HashMap<>());
+            TRANSITIONS.get(SUSCEPTIBLE)
+                    .put(CONTACT_HOT, () -> happens(CONTACT_HOT.probability) ? INFECTED : SUSCEPTIBLE);
+
+            TRANSITIONS.get(SUSCEPTIBLE)
+                    .put(VACCIN, () -> happens(VACCIN.probability) ? VACCINATED : SUSCEPTIBLE);
+
+            // (INFECTED, TIMEOUT) -> RECOVERED | DEAD
+            TRANSITIONS.put(INFECTED, new HashMap<>());
+            TRANSITIONS.get(INFECTED)
+                    .put(TIMEOUT, () -> happens(TIMEOUT.probability) ? DEAD : RECOVERED);
+
     }
 
     // private constructor prevents object creation
