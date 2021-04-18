@@ -1,12 +1,20 @@
 package pandemie;
 
+/** classe Event
+ *
+ * @author Laetitia Abelli
+ * @version 2021.04.18
+ *
+ * définit la probabilité de contact, de mourir, d'être vaccinné, ou d'être recontaminé
+ */
+
 public enum Event {
 
-    CONTACT_HOT(0.2), CONTACT_COLD(0.4), TIMEOUT(0.5), VACCIN(0.01);
+    CONTACT(0.2), TIMEOUT(0.4), VACCIN(0.01),RECONTACT(0.05);
 
     protected double probability;
 
-    /**constructeur
+    /**constructeur privé
      *
      * @param proba
      */
@@ -14,6 +22,9 @@ public enum Event {
         this.probability= proba;
     }
 
+    /** méthode getProba()
+     * @return probability
+     */
     public double getProba() {
         return probability;
     }
