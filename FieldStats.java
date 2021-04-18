@@ -14,7 +14,7 @@ import java.util.HashMap;
  * @version 2021.04.18
  */
 class FieldStats {
-    // Counters for each type of entity (fox, rabbit, etc.) in the simulation.
+    // Counters for sapiens
     private final HashMap<State, Counter> counters;
     // Whether the counters are currently up to date.
     private boolean countsValid;
@@ -23,7 +23,7 @@ class FieldStats {
      * Construct a FieldStats object.
      */
     FieldStats() {
-        // Set up a collection for counters for each type of animal that
+        // Set up a collection for counters for each type of spaiens that
         // we might find
         counters = new HashMap<>();
         countsValid = false;
@@ -91,7 +91,7 @@ class FieldStats {
     }
 
     /**
-     * Indicate that an animal count has been completed.
+     * Indicate that a sapiens count has been completed.
      */
     void countFinished() {
         countsValid = true;
