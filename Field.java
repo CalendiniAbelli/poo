@@ -7,7 +7,7 @@ import java.util.Random;
 
 /**
  * Represent a rectangular grid of field positions. Each position is able to
- * store a single sapeins.
+ * store a single sapiens.
  *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29
@@ -23,7 +23,7 @@ class Field {
     // The depth and width of the field.
     private final int depth;
     private final int width;
-    // Storage for the animals.
+    // Storage for the sapiens.
     private final Sapiens[][] field;
 
     /**
