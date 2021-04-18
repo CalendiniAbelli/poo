@@ -19,6 +19,9 @@ import static pandemie.State.*;
  *
  * @author Peter Sander
  *
+ * @author Tommy Calendini
+ * @version 2021.04.18
+ *
  */
 final class Transition {
     // set up a two-key map from a one-key map whose values are
@@ -33,18 +36,24 @@ final class Transition {
     //  constructor to create an object
     static {
 
-            // (SUSCEPTIBLE, CONTACT) -> SUSCEPTIBLE | INFECTED
-            TRANSITIONS.put(SUSCEPTIBLE, new HashMap<>());
-            TRANSITIONS.get(SUSCEPTIBLE)
-                    .put(CONTACT_HOT, () -> happens(CONTACT_HOT.probability) ? INFECTED : SUSCEPTIBLE);
+        // (SUSCEPTIBLE, CONTACT) -> SUSCEPTIBLE | INFECTED
+        TRANSITIONS.put(SUSCEPTIBLE, new HashMap<>());
+        TRANSITIONS.get(SUSCEPTIBLE).put(CONTACT, () -> happens(CONTACT.probability) ? INFECTED : SUSCEPTIBLE);
 
-            TRANSITIONS.get(SUSCEPTIBLE)
-                    .put(VACCIN, () -> happens(VACCIN.probability) ? VACCINATED : SUSCEPTIBLE);
+        // (SUSCEPTIBLE, VACCIN) -> VACCINATED | SUSCEPTIBLE
+        TRANSITIONS.get(SUSCEPTIBLE).put(VACCIN, () -> happens(VACCIN.probability) ? VACCINATED : SUSCEPTIBLE);
 
-            // (INFECTED, TIMEOUT) -> RECOVERED | DEAD
-            TRANSITIONS.put(INFECTED, new HashMap<>());
-            TRANSITIONS.get(INFECTED)
-                    .put(TIMEOUT, () -> happens(TIMEOUT.probability) ? DEAD : RECOVERED);
+
+        // (RECOVERED, CONTACT) -> RECOVERED | INFECTED
+        TRANSITIONS.put(RECOVERED, new HashMap<>());
+        TRANSITIONS.get(RECOVERED).put(RECONTACT, () -> happens(RECONTACT.probability) ? INFECTED : RECOVERED);
+
+        // (RECOVERED, VACCIN) -> VACCINATED | RECOVERED
+        TRANSITIONS.get(RECOVERED).put(VACCIN, () -> happens(VACCIN.probability) ? VACCINATED : RECOVERED);
+
+        // (INFECTED, TIMEOUT) -> RECOVERED | DEAD
+        TRANSITIONS.put(INFECTED, new HashMap<>());
+        TRANSITIONS.get(INFECTED).put(TIMEOUT, () -> happens(TIMEOUT.probability) ? DEAD : RECOVERED);
 
     }
 
