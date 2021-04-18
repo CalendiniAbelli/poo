@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import pandemie.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,9 @@ import static pandemie.State.*;
  * @author Michael Kölling and David J. Barnes
  * @author Peter Sander
  * @version 2017.03.24
+ *
+ * @author Tommy Calendini
+ * @version 2021.04.18
  */
 class GridView implements SimulatorView {
     private static final int DELAY_BETWEEN_ITERATIONS = 10000;  // msecs
@@ -113,10 +117,10 @@ class GridView implements SimulatorView {
     }
 
     /**
-     * Define a color to be used for a given class of animal.
+     * Define a color to be used for a given class of sapiens.
      *
-     * @param etat The animal's Class<Animal> object.
-     * @param color       The color to be used for the given class.
+     * @param etat (State)
+     * @param color (Color)
      */
     @Override
     public void setColor(State etat, Color color) {
@@ -124,7 +128,7 @@ class GridView implements SimulatorView {
     }
 
     /**
-     * @return The color to be used for a given class of animal.
+     * @return The color to be used for a given class of sapiens.
      */
     private Color getColor(State etat) {
         Color col = colors.get(etat);
