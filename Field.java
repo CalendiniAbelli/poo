@@ -7,11 +7,15 @@ import java.util.Random;
 
 /**
  * Represent a rectangular grid of field positions. Each position is able to
- * store a single animal.
+ * store a single sapeins.
  *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29
+ *
+ * @author Tommy Calendini
+ * @version 2021.04.18
  */
+
 class Field {
     // A random number generator for providing random locations.
     private static final Random rand = Randomizer.getRandom();
@@ -55,10 +59,10 @@ class Field {
     }
 
     /**
-     * Place an animal at the given location. If there is already an animal at
+     * Place a sapiens at the given location. If there is already a sapiens at
      * the location it will be lost.
      *
-     * @param sapiens The animal to be placed.
+     * @param sapiens The sapiens to be placed.
      * @param row    Row coordinate of the location.
      * @param col    Column coordinate of the location.
      */
@@ -67,32 +71,32 @@ class Field {
     }
 
     /**
-     * Place an animal at the given location. If there is already an animal at
+     * Place a sapiens at the given location. If there is already a sapiens at
      * the location it will be lost.
      *
-     * @param sapiens   The animal to be placed.
-     * @param location Where to place the animal.
+     * @param sapiens   The sapiens to be placed.
+     * @param location Where to place the sapiens.
      */
     void place(Sapiens sapiens, Location location) {
         field[location.getRow()][location.getCol()] = sapiens;
     }
 
     /**
-     * Return the animal at the given location, if any.
+     * Return the sapiens at the given location, if any.
      *
      * @param location Where in the field.
-     * @return The animal at the given location, or null if there is none.
+     * @return The sapiens at the given location, or null if there is none.
      */
     Sapiens getSapiensAt(Location location) {
         return getSapiensAt(location.getRow(), location.getCol());
     }
 
     /**
-     * Return the animal at the given location, if any.
+     * Return the sapiens at the given location, if any.
      *
      * @param row The desired row.
      * @param col The desired column.
-     * @return The animal at the given location, or null if there is none.
+     * @return The sapiens at the given location, or null if there is none.
      */
     Sapiens getSapiensAt(int row, int col) {
         return field[row][col];
