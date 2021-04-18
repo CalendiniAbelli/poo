@@ -9,6 +9,9 @@ import java.util.HashMap;
  *
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29
+ *
+ * @author Tommy Calendini
+ * @version 2021.04.18
  */
 class FieldStats {
     // Counters for each type of entity (fox, rabbit, etc.) in the simulation.
@@ -51,7 +54,7 @@ class FieldStats {
      *
      * @return An int with the number for this class.
      */
-    int getPopulationCount(Field field, Class<? extends Sapiens> key) {
+    int getPopulationCount(Field field, State key) {
         if (!countsValid) {
             generateCounts(field);
         }
@@ -72,9 +75,9 @@ class FieldStats {
     }
 
     /**
-     * Increment the count for one class of animal.
+     * Increment the count for one class of sapiens.
      *
-     * @param etat The class of animal to increment.
+     * @param etat The class of sapiens to increment.
      */
     void incrementCount(State etat) {
         Counter count = counters.get(etat);
@@ -116,8 +119,8 @@ class FieldStats {
     }
 
     /**
-     * Generate counts of the number of foxes and rabbits. These are not kept up
-     * to date as foxes and rabbits are placed in the field, but only when a
+     * Generate counts of the number of sapiens. These are not kept up
+     * to date as sapiens are placed in the field, but only when a
      * request is made for the information.
      *
      * @param field The field to generate the stats for.
