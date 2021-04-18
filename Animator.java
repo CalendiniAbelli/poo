@@ -13,6 +13,9 @@ import javafx.stage.Stage;
  * Simulator actually manages the simulation.
  *
  * @author Peter Sander
+ *
+ * @author Tommy Calendini
+ * @version 2021.04.18
  */
 public class Animator extends Application {
     private Simulator simulator;
