@@ -9,6 +9,9 @@ import javafx.scene.paint.Color;
  * @author Michael Kölling and David J. Barnes
  * @author Peter Sander
  * @version 2016.02.29
+ *
+ * @author Tommy Calendini
+ * @version 2021.04.18
  */
 interface SimulatorView {
     /**
