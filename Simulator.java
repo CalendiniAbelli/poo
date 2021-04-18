@@ -11,14 +11,17 @@ import java.util.*;
  * @author David J. Barnes and Michael Kölling
  * @author Peter Sander
  * @version 2017.03.24
+ *
+ * @author Tommy Calendini
+ * @version 2021.04.11
  */
 class Simulator {
     static final int DEFAULT_WIDTH = 120;
     static final int DEFAULT_DEPTH = 80;
     static final int ITERATIONS = 5000;
 
-    static final double INFECTED_CREATION_PROBABILITY=0.001;
-    static final double SUSCEPTIBLE_CREATION_PROBABILITY=0.09;
+    static final double INFECTED_CREATION_PROBABILITY=0.008;
+    static final double SUSCEPTIBLE_CREATION_PROBABILITY=0.08;
 
     private final List<Sapiens> sapiens;
     private final Field field;
@@ -64,8 +67,18 @@ class Simulator {
     int simulateOneStep() {
         step++;
         for (Iterator<Sapiens> it = sapiens.iterator(); it.hasNext(); ) {
-            Sapiens sapiensinv = it.next();
-            sapiensinv.act();
+            Sapiens sapien = it.next();
+            if(sapien.getState()==INFECTED){
+                sapien.infectedLife();
+            }
+            // Si l'individu n'est pas mort, on appelle act()
+            // La vaccination n'arrive qu'à partir du 20ème rang
+            else if(sapien.getState()!=DEAD) {
+                sapien.act();
+                if (step > 20) {
+                    sapien.vacciner();
+                }
+            }
         }
         updateViews();
         return step;
@@ -90,7 +103,11 @@ class Simulator {
     }
 
     /**
-     * Randomly populate the field with foxes and rabbits.
+     * Randomly populate the field with sapiens
+     * Si rand est inférieur ou égal à INFECTED_CREATION_PROBABILITY,
+     * l'individu devient un "infected".
+     * Si rand est inférieur ou égale à SUSCEPTIBLE_CREATION_PROBABILITY,
+     * il devient "suceptible".
      */
     private void populate() {
         Random rand = Randomizer.getRandom();
